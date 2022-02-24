@@ -1,0 +1,262 @@
+{
+	"info": {
+		"_postman_id": "5c503332-3510-493b-823c-1f3963ecdda3",
+		"name": "camunda demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create test process 1",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"variables\": {\n    \"userId\": {\n      \"value\": \"A\",\n      \"type\": \"String\"\n    }\n  },\n  \"businessKey\": \"myBusinessKey\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/process-definition/key/test_process_1/start",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"process-definition",
+						"key",
+						"test_process_1",
+						"start"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get user tasks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/task?withoutTenantId=false&includeAssignedTasks=false&assigned=false&unassigned=false&withoutDueDate=false&withCandidateGroups=false&withoutCandidateGroups=false&withCandidateUsers=false&withoutCandidateUsers=false&active=false&suspended=false&processVariables=userId_eq_A&variableNamesIgnoreCase=false&variableValuesIgnoreCase=false",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"task"
+					],
+					"query": [
+						{
+							"key": "withoutTenantId",
+							"value": "false"
+						},
+						{
+							"key": "includeAssignedTasks",
+							"value": "false"
+						},
+						{
+							"key": "assigned",
+							"value": "false"
+						},
+						{
+							"key": "unassigned",
+							"value": "false"
+						},
+						{
+							"key": "withoutDueDate",
+							"value": "false"
+						},
+						{
+							"key": "withCandidateGroups",
+							"value": "false"
+						},
+						{
+							"key": "withoutCandidateGroups",
+							"value": "false"
+						},
+						{
+							"key": "withCandidateUsers",
+							"value": "false"
+						},
+						{
+							"key": "withoutCandidateUsers",
+							"value": "false"
+						},
+						{
+							"key": "active",
+							"value": "false"
+						},
+						{
+							"key": "suspended",
+							"value": "false"
+						},
+						{
+							"key": "processVariables",
+							"value": "userId_eq_A"
+						},
+						{
+							"key": "variableNamesIgnoreCase",
+							"value": "false"
+						},
+						{
+							"key": "variableValuesIgnoreCase",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get form fields",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/task/d61d0e41-8867-11ec-a0aa-0242d2f3c0f5/form-variables?deserializeValues=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"task",
+						"d61d0e41-8867-11ec-a0aa-0242d2f3c0f5",
+						"form-variables"
+					],
+					"query": [
+						{
+							"key": "deserializeValues",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submit task form",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"variables\": {\n    \"talent_name\": {\n      \"value\": \"Pawel Gdula\"\n    },\n    \"talent_job_type\": {\n      \"value\": \"long\"\n    }    \n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/task/d61d0e41-8867-11ec-a0aa-0242d2f3c0f5/submit-form",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"task",
+						"d61d0e41-8867-11ec-a0aa-0242d2f3c0f5",
+						"submit-form"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submit message",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"messageName\": \"confirm_long_message\",\n  \"businessKey\": \"myBusinessKey\",\n  \"correlationKeys\": {\n    \"userId\": {\n      \"value\": \"A\",\n      \"type\": \"String\"\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/message",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"message"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "submit signal",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"cancel_all_am_tasks\",\n  \"variables\": {\n    \"userId\": {\n      \"value\": \"A\"\n    }\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/engine-rest/signal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"engine-rest",
+						"signal"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
